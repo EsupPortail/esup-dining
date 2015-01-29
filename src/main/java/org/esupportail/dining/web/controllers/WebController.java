@@ -48,7 +48,7 @@ public class WebController {
 			throws Exception {
 		try {
 			dc.executeUpdate("DELETE FROM FAVORITERESTAURANT "
-					+ "WHERE RESTAURANTID=" + StringEscapeUtils.escapeSql(id) + "AND USERNAME='"
+					+ "WHERE RESTAURANTID='" + StringEscapeUtils.escapeSql(id) + "' AND USERNAME='"
 					+ StringEscapeUtils.escapeSql(authenticator.getUser().getLogin()) + "'");
 		} catch (NullPointerException e) { /*
 											 * Useful is the user isn't logged
