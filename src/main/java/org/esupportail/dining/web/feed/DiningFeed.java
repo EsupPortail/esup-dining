@@ -228,25 +228,14 @@ public class DiningFeed implements Serializable {
 		}
 	}
 
-	public boolean isClosed(Restaurant r) {
-
-		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-
-		Date reopenningDate = new Date(0);
-		Date todayDate = new Date();
-
-		try {
-			reopenningDate = sf.parse(r.getClosing());
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-
-		if (todayDate.before(reopenningDate)) {
-			return true;
-		}
-
-		return false;
-	}
+        public boolean isClosed(Restaurant r) {
+                if (!"0".equals(r.getClosing()))
+                {
+                        return true;
+                } else {
+                        return false;
+                }
+        }
 
 	@Override
 	public int hashCode() {

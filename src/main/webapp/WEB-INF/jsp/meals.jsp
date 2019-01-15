@@ -11,10 +11,7 @@
 		<c:if test="${restaurantClosed}">
 			<div class="alert alert-warning">
 				<a class="close" data-dismiss="alert">×</a>
-				<fmt:parseDate value="${restaurant.closing}" var="parsedDate" pattern="yyyy-MM-dd" />
-				<fmt:formatDate value="${parsedDate}" var="localeDate" pattern="${sessionScope.dateLocalePattern}" />
-				${localeDate}
-				<spring:message code="restaurant.closed" arguments="${localeDate}"/>
+				${restaurant.operationalhours}
 			</div>
 		</c:if>
 		
