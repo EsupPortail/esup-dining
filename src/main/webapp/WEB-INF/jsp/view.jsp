@@ -69,13 +69,17 @@
 						</thead>
 						<tbody>
 							<c:forEach var="dininghall" items="${dininghalls.value}">
+								<portlet:renderURL var="viewMeals">
+			  						<portlet:param name="action" value="viewMeals"/>
+			  						<portlet:param name="id" value="${dininghall.id}"/>
+								</portlet:renderURL>
 								<portlet:renderURL var="viewRestaurant">
-					  				<portlet:param name="action" value="viewMeals"/>
-					  				<portlet:param name="id" value="${dininghall.id}"/>
+			  						<portlet:param name="action" value="viewRestaurant"/>
+			  						<portlet:param name="id" value="${dininghall.id}"/>
 								</portlet:renderURL>
 								<tr>
 									<td<c:if test="${dininghall.additionalProperties['isClosed']}"> data-closed="true" class="warning"</c:if><c:if test="${dininghall.additionalProperties['isClosed']}">class="warning"</c:if>>
-										<a href="${viewRestaurant}">
+										<a href="${viewMeals}">
 											${dininghall.title}
 										</a>
 									</td>							
