@@ -12,14 +12,12 @@
 <c:set var="n"><portlet:namespace/></c:set>
 
 <%-- Inclusion CSS --%>
-<link type="text/css" rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css">
 <link type="text/css" rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/esup-dining-portlet.css">
 
 <%-- Inclusion JS --%>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
-<script type="text/javascript">$().carousel || document.write('<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"><\/script>')</script>
 
 <%-- Portlet container --%>
 <div class="pc sm">

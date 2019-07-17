@@ -151,3 +151,9 @@ table .is-closed {
 .starred-icon {
 	color: #E5DD6E;
 }
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+

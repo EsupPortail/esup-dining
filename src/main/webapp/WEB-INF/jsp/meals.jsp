@@ -66,16 +66,16 @@
 					</li>
 					<c:if test="${restaurant.accessibility}">
 					<li>
-						<span class="icn-fam icn-fam-disability">
+						<a href="" class="icn-fam icn-fam-disability disabled">
 							<spring:message code="restaurant.msg.disability"/>
-						</span>
+						</a>
 					</li>
 					</c:if>
 					<c:if test="${restaurant.wifi}">
 					<li>
-						<span class="icn-fam icn-fam-wifi">
+						<a href="" class="cn-fam icn-fam-wifi disabled">
 							<spring:message code="restaurant.wifi"/>					
-						</span>
+						</a>
 					</li>
 					</c:if>
 				</ul>
