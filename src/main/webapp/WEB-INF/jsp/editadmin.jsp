@@ -25,45 +25,40 @@
   <portlet:param name="action" value="setDefaultArea"/>
 </portlet:actionURL>
 
-<h1>
-Choose your feed
-</h1>		
-		<portlet:actionURL var="urlFlux">
-		  <portlet:param name="action" value="urlFeed"/>
-		</portlet:actionURL>
+	<legend><spring:message code="edit.admin.form.chooseFeed"/></legend>
+	<portlet:actionURL var="urlFlux">
+	  <portlet:param name="action" value="urlFeed"/>
+	</portlet:actionURL>
 
-		<form method="post" action="${urlFlux}" class="clearfix">		
-			<c:if test="${not empty feedList}">
-				
-				<label>
-					Feed to choose :
-				</label>
-				
-				<select id="field-feed" name="feedId">
-					<c:forEach var="feedInfo" items="${feedList}">
-						<c:choose>
-							<c:when test="${feedInfo.isDefault == true}">
-								<c:set var="selected" value="selected=\"selected\""/>
-							</c:when>
-							<c:otherwise>
-								<c:set var="selected" value=""/>
-							</c:otherwise>
-						</c:choose>
-						<option value="${feedInfo.id}" ${selected}>
-							${feedInfo.name}
-						</option>
-					</c:forEach>
-				</select>
-				
-				<input type="submit"/>
-												
-			</c:if>
+	<form method="post" action="${urlFlux}" class="clearfix">		
+		<c:if test="${not empty feedList}">
 			
-				
-		</form>
-		<hr/>
+			<c:set var="feediIdSelected" value="0"/>
+			<select id="field-feed" name="feedId">
+				<c:forEach var="feedInfo" items="${feedList}">
+					<c:choose>
+						<c:when test="${feedInfo.isDefault == true}">
+							<c:set var="selected" value="selected=\"selected\""/>
+							<c:set var="feediIdSelected" value="${feedInfo.id}"/>
+						</c:when>
+						<c:otherwise>
+							<c:set var="selected" value=""/>
+						</c:otherwise>
+					</c:choose>
+					<option value="${feedInfo.id}" ${selected}>
+						${feedInfo.name}
+					</option>
+				</c:forEach>
+			</select>
+			
+			<input type="submit"/>
+											
+		</c:if>
+	</form>
+	<hr/>
 		
-		<div>
+	<div>
+	<legend><spring:message code="edit.form.zone.legend"/></legend>
 	<form method="post" action="${setAreas}" class="clearfix"> 
 	
 		<c:forEach var="areaValue" items="${areaList}" varStatus="status">
@@ -76,6 +71,7 @@ Choose your feed
 				${areaValue}
 			</label>
 		</c:forEach>
+		<input type="hidden" value="${feediIdSelected}" name="feedId"> 
 		
 		<br/>
 		<c:if test="${areaSubmit}">
@@ -104,7 +100,7 @@ Choose your feed
 		</c:if>
 		
 </c:if>
-<c:if test="${not empty user}">
+<c:if test="${empty user}">
 	<spring:message code="admin.notallowed"/>
 </c:if>
 

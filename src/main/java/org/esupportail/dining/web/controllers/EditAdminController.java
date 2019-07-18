@@ -218,7 +218,8 @@ public class EditAdminController extends AbstractExceptionController {
 	public void setDefaultArea(
 			ActionRequest request,
 			ActionResponse response,
-			@RequestParam(value = "chkArea[]", required = false) String[] listAreas)
+			@RequestParam(value = "chkArea[]", required = false) String[] listAreas,
+			@RequestParam(value = "feedId", required = true) int feedId)
 					throws Exception {
 		String areanames = "";
 		if (listAreas != null) {
@@ -231,7 +232,7 @@ public class EditAdminController extends AbstractExceptionController {
 		response.setRenderParameter("action", "adminSettings");
 		response.setRenderParameter("areaSubmit", "true");
 
-		ResultSet results = this.dc.executeQuery("SELECT * FROM PATHFLUX");
+		ResultSet results = this.dc.executeQuery("SELECT * FROM PATHFLUX WHERE ID=" + feedId);
 		results.next();
 		results.updateString("AREANAME", areanames);
 		results.updateRow();
