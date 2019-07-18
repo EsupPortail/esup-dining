@@ -162,3 +162,8 @@ a.disabled {
   pointer-events: none;
   cursor: default;
 }
+
+.table>tbody>tr>td {
+    vertical-align: middle
+}
+

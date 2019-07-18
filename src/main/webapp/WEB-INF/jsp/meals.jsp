@@ -65,7 +65,7 @@
 					</c:if>
 					<c:if test="${restaurant.wifi}">
 					<li>
-						<a href="" class="cn-fam icn-fam-wifi disabled">
+						<a href="" class="icn-fam icn-fam-wifi disabled">
 							<spring:message code="restaurant.wifi"/>					
 						</a>
 					</li>

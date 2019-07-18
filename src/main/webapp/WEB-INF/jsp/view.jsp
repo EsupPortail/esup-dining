@@ -17,6 +17,9 @@
 							<span class="glyphicon glyphicon-star starred-icon"></span>
 							<spring:message code="view.favorite.title"/>
 						</th>
+                                               <th class="" width="80px">
+                                                        <spring:message code="view.restaurant.status"/>
+                                                </th>
 						<th class="ta-right">
 							<spring:message code="view.restaurant.detail"/>
 						</th>
@@ -38,6 +41,18 @@
 									${favRestaurant.title}
 								</a>
 							</td>
+                                                       <td width="80px">
+                                                                <c:if test="${favRestaurant.additionalProperties['isClosed']}">
+                                                                        <c:set var = "editHours" value = "${fn:replace(favRestaurant.operationalhours, '<br/>', '&#13;')}" />
+
+                                                                        <img src="<%= renderRequest.getContextPath() %>/images/bullet_closed.png" title="${editHours}"
+                                                                        alt="Detail" />
+                                                                </c:if>
+                                                                <c:if test="${!favRestaurant.additionalProperties['isClosed']}">
+                                                                        <img src="<%= renderRequest.getContextPath() %>/images/bullet_open.png" title="<spring:message code="view.restaurant.open"/>"
+                                                                        alt="Detail" />
+                                                                </c:if>
+                                                        </td>
 							<td class="ta-right">
 								<a href="${viewRestaurant}">
 									<img src="<%= renderRequest.getContextPath() %>/images/information.png"
@@ -62,6 +77,9 @@
 								<th class="lead">
 									<spring:message code="view.list.title"/> ${dininghalls.key}
 								</th>
+                                                               <th class="" width="80px">
+                                                                        <spring:message code="view.restaurant.status"/>
+                                                                </th>
 								<th class="ta-right">
 									<spring:message code="view.restaurant.detail"/>
 								</th>
@@ -78,11 +96,23 @@
 			  						<portlet:param name="id" value="${dininghall.id}"/>
 								</portlet:renderURL>
 								<tr>
-									<td<c:if test="${dininghall.additionalProperties['isClosed']}"> data-closed="true" class="warning"</c:if><c:if test="${dininghall.additionalProperties['isClosed']}">class="warning"</c:if>>
+									<td>
 										<a href="${viewMeals}">
 											${dininghall.title}
 										</a>
 									</td>							
+                                                                       <td width="80px">
+                                                                                <c:if test="${dininghall.additionalProperties['isClosed']}">
+                                                                                        <c:set var = "editHours" value = "${fn:replace(dininghall.operationalhours, '<br/>', '&#13;')}" />
+
+                                                                                        <img src="<%= renderRequest.getContextPath() %>/images/bullet_closed.png" title="${editHours}"
+                                                                                        alt="Detail" />
+                                                                                </c:if>
+                                                                                <c:if test="${!dininghall.additionalProperties['isClosed']}">
+                                                                                        <img src="<%= renderRequest.getContextPath() %>/images/bullet_open.png" title="<spring:message code="view.restaurant.open"/>"
+                                                                                        alt="Detail" />
+                                                                                </c:if>
+                                                                        </td>
 									<td class="ta-right">
 										<a href="${viewRestaurant}">
 											<img src="<%= renderRequest.getContextPath() %>/images/information.png"
