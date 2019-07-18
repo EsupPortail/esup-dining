@@ -6,12 +6,6 @@
 		</a>
 	</p>
 	
-	<c:if test="${restaurantClosed}">
-		<div class="alert alert-warning">
-			<a class="close" data-dismiss="alert">×</a>			
-			${restaurant.operationalhours}
-		</div>
-	</c:if>
 
 	<c:if test="${empty restaurant}">
 		<h1>
@@ -23,7 +17,7 @@
 		</a>
 	</c:if>
 
-	<c:if test="${not empty restaurant && !restaurantClosed}">		
+	<c:if test="${not empty restaurant}">		
 			
 		<nav class="navbar navbar-default" role="navigation">
 		
@@ -91,6 +85,13 @@
 			<div>
 		</nav>
 		
+		<c:if test="${restaurantClosed}">
+			<div class="alert alert-warning">
+				<a class="close" data-dismiss="alert">×</a>			
+				<strong><spring:message code="restaurant.closed"/></strong>
+			</div>
+		</c:if>
+
 		<%-- start short desc --%>
 		<c:if test="${not empty restaurant.shortdesc}">
 			<p>

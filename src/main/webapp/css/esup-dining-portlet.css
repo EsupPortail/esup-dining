@@ -123,8 +123,14 @@ table .is-closed {
 .smart-choice {
 	background: #00FF6A;
 }
+
 .warning {
 	background: #FFD859;
+}
+
+.alert-warning {
+	color: #f90303;
+	text-align: center;
 }
 
 [data-closed] a:before {
@@ -156,4 +162,3 @@ a.disabled {
   pointer-events: none;
   cursor: default;
 }
-

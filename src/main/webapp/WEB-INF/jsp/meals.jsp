@@ -8,17 +8,9 @@
 
 	<c:if test="${not empty restaurant}">
 		
-		<c:if test="${restaurantClosed}">
-			<div class="alert alert-warning">
-				<a class="close" data-dismiss="alert">×</a>
-				${restaurant.operationalhours}
-			</div>
-		</c:if>
+		<nav class="navbar navbar-default" role="navigation">
 		
-		<c:if test="${!restaurantClosed}">
-			<nav class="navbar navbar-default" role="navigation">
-		
-  			<div class="navbar-header">
+  	    	    <div class="navbar-header">
 		    	<span type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 				    <span class="sr-only">Toggle navigation</span>
 				    <span class="icon-bar"></span>
@@ -82,95 +74,107 @@
 			</div>
 		</nav>
 		
-		<div class="menus">
-			<ul class="tab-header">
+                <c:if test="${restaurantClosed}">
+                        <div class="alert alert-warning">
+                                <a class="close" data-dismiss="alert">×</a>
+                                <strong><spring:message code="restaurant.closed"/></strong>
+                        </div>
+                </c:if>
+
+		<c:if test="${!restaurantClosed}">
+			<div class="menus">
+				<ul class="tab-header">
+					<c:forEach var="menu" items="${menus}">
+						<li>
+							<a href="#menu-${menu.date}">
+								<fmt:parseDate value="${menu.date}" var="parsedDate" pattern="yyyy-MM-dd" />
+								<fmt:formatDate value="${parsedDate}" pattern="${sessionScope.dateLocalePattern}" />
+							</a>
+						</li>
+					</c:forEach>
+				</ul>
+				<c:if test="${empty menus}">
+				<center><h2>Aucun menu disponible</h2></center>
+				</c:if>
+	
 				<c:forEach var="menu" items="${menus}">
-					<li>
-						<a href="#menu-${menu.date}">
+					
+					<div id="menu-${menu.date}">
+						<h2>
 							<fmt:parseDate value="${menu.date}" var="parsedDate" pattern="yyyy-MM-dd" />
 							<fmt:formatDate value="${parsedDate}" pattern="${sessionScope.dateLocalePattern}" />
-						</a>
-					</li>
-				</c:forEach>
-			</ul>
-			<c:forEach var="menu" items="${menus}">
-				
-				<div id="menu-${menu.date}">
-					<h2>
-						<fmt:parseDate value="${menu.date}" var="parsedDate" pattern="yyyy-MM-dd" />
-						<fmt:formatDate value="${parsedDate}" pattern="${sessionScope.dateLocalePattern}" />
-					</h2>
-					<div class="meals-accordion">
-						
-						<c:forEach var="meal" items="${menu.meal}">
-		
-							<h3 class="accordion-title">
-								${meal.name}
-							</h3>
-
-							<div class="meal-container" style="height: auto !important;">
-
-								<c:forEach var="foodCategory" items="${meal.foodcategory}">
+						</h2>
+						<div class="meals-accordion">
+							
+							<c:forEach var="meal" items="${menu.meal}">
 			
-									<h4>
-										${foodCategory.name}
-									</h4>
-									
-									<ul>
-										<c:forEach var="dish" items="${foodCategory.dishes}">
-										<c:if test="${not empty dish.code}">
-												<c:forEach var="codeNumber" items="${dish.code}">
-													<c:forEach var="userCodeNumber" items="${nutritionPrefs}">
-														
-														<c:if test="${codeNumber==userCodeNumber}">
-															
-															<c:choose>
-																<c:when test="${codeNumber=='15'}">
-																	<c:set var="elementClassName" value='alert alert-success"'/>
-																</c:when>
-																<c:otherwise>
-																	<c:set var="elementClassName" value='alert alert-warning"'/>
-																</c:otherwise>
-															</c:choose>
-														</c:if>
-														
-													</c:forEach>								
-												</c:forEach>
-											</c:if>
-											<li class="${elementClassName}">
-
-												<portlet:renderURL var="viewDish">
-													<portlet:param name="action" value="viewDish"/>
-													<portlet:param name="id" value="${restaurant.id}"/>
-													<portlet:param name="name" value="${dish.name}"/>
-													<portlet:param name="ingredients" value="${dish.ingredients}"/>
-													<portlet:param name="nutritionitems" value="${dish.nutritionitems}"/>
-													<portlet:param name="code" value="${dish.code}"/>
-												</portlet:renderURL>
-
-												<c:if test="${not empty dish.code or not empty dish.ingredients or not empty dish.nutritionitems}">
-												<a href="${viewDish}">
-													</c:if>
-														${dish.name}
-													<c:if test="${not empty dish.code or not empty dish.ingredients or not empty dish.nutritionitems}">
-													<c:forEach var="codeNumber" items="${dish.code}">
-														<img src="<%= renderRequest.getContextPath() %><spring:message code="meal.code.${codeNumber}.img" />"
-														     alt="<spring:message code="meal.code.${codeNumber}.description" />"
-															 title="<spring:message code="meal.code.${codeNumber}.name" />"/>									
-													</c:forEach>
-												</a>
-												</c:if>				
-											</li>
-										</c:forEach>
-									</ul>
-								</c:forEach>
-							</div>
-						</c:forEach>
-					</div>
-				</div>
+								<h3 class="accordion-title">
+									${meal.name}
+								</h3>
 	
-			</c:forEach>
-		</div>
+								<div class="meal-container" style="height: auto !important;">
+	
+									<c:forEach var="foodCategory" items="${meal.foodcategory}">
+				
+										<h4>
+											${foodCategory.name}
+										</h4>
+										
+										<ul>
+											<c:forEach var="dish" items="${foodCategory.dishes}">
+											<c:if test="${not empty dish.code}">
+													<c:forEach var="codeNumber" items="${dish.code}">
+														<c:forEach var="userCodeNumber" items="${nutritionPrefs}">
+															
+															<c:if test="${codeNumber==userCodeNumber}">
+																
+																<c:choose>
+																	<c:when test="${codeNumber=='15'}">
+																		<c:set var="elementClassName" value='alert alert-success"'/>
+																	</c:when>
+																	<c:otherwise>
+																		<c:set var="elementClassName" value='alert alert-warning"'/>
+																	</c:otherwise>
+																</c:choose>
+															</c:if>
+															
+														</c:forEach>								
+													</c:forEach>
+												</c:if>
+												<li class="${elementClassName}">
+	
+													<portlet:renderURL var="viewDish">
+														<portlet:param name="action" value="viewDish"/>
+														<portlet:param name="id" value="${restaurant.id}"/>
+														<portlet:param name="name" value="${dish.name}"/>
+														<portlet:param name="ingredients" value="${dish.ingredients}"/>
+														<portlet:param name="nutritionitems" value="${dish.nutritionitems}"/>
+														<portlet:param name="code" value="${dish.code}"/>
+													</portlet:renderURL>
+	
+													<c:if test="${not empty dish.code or not empty dish.ingredients or not empty dish.nutritionitems}">
+													<a href="${viewDish}">
+														</c:if>
+															${dish.name}
+														<c:if test="${not empty dish.code or not empty dish.ingredients or not empty dish.nutritionitems}">
+														<c:forEach var="codeNumber" items="${dish.code}">
+															<img src="<%= renderRequest.getContextPath() %><spring:message code="meal.code.${codeNumber}.img" />"
+														     	alt="<spring:message code="meal.code.${codeNumber}.description" />"
+															 	title="<spring:message code="meal.code.${codeNumber}.name" />"/>									
+														</c:forEach>
+													</a>
+													</c:if>				
+												</li>
+											</c:forEach>
+										</ul>
+									</c:forEach>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
+		
+				</c:forEach>
+			</div>
 		</c:if>
 	</c:if>	
 
