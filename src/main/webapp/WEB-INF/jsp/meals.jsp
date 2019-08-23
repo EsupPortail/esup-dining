@@ -122,65 +122,67 @@
 										
 										<table>
 											<c:forEach var="dish" items="${foodCategory.dishes}">
-												<c:set var="findAllergen" value="0"/>
-												<portlet:renderURL var="viewDish">
-													<portlet:param name="action" value="viewDish"/>
-													<portlet:param name="id" value="${restaurant.id}"/>
-													<portlet:param name="name" value="${dish.name}"/>
-													<portlet:param name="ingredients" value="${dish.ingredients}"/>
-													<portlet:param name="nutritionitems" value="${dish.nutritionitems}"/>
-													<portlet:param name="code" value="${dish.code}"/>
-												</portlet:renderURL>
-												<tr>
-												<th width="85px" style="padding-right:1em; background-color: transparent; text-align:right">
-													<c:if test="${not empty dish.code}">
-														<c:forEach var="codeNumber" items="${dish.code}">
-															<c:forEach var="userCodeNumber" items="${nutritionPrefs}">
-																
-																<c:if test="${codeNumber==userCodeNumber}">
+												<c:if test="${not empty dish.name}">
+													<c:set var="findAllergen" value="0"/>
+													<portlet:renderURL var="viewDish">
+														<portlet:param name="action" value="viewDish"/>
+														<portlet:param name="id" value="${restaurant.id}"/>
+														<portlet:param name="name" value="${dish.name}"/>
+														<portlet:param name="ingredients" value="${dish.ingredients}"/>
+														<portlet:param name="nutritionitems" value="${dish.nutritionitems}"/>
+														<portlet:param name="code" value="${dish.code}"/>
+													</portlet:renderURL>
+													<tr>
+													<th width="85px" style="padding-right:1em; background-color: transparent; text-align:right">
+														<c:if test="${not empty dish.code}">
+															<c:forEach var="codeNumber" items="${dish.code}">
+																<c:forEach var="userCodeNumber" items="${nutritionPrefs}">
 																	
-																	<c:choose>
-																		<c:when test="${codeNumber=='12'}">
-																			<img src="<%= renderRequest.getContextPath() %><spring:message code="meal.code.${codeNumber}.img" />"
-																				 alt="<spring:message code="meal.code.${codeNumber}.description" />"
-																				 title="<spring:message code="meal.code.${codeNumber}.name" />"/>	
-																		</c:when>
-																		<c:when test="${codeNumber=='15'}">
-																			<img src="<%= renderRequest.getContextPath() %><spring:message code="meal.code.${codeNumber}.img" />"
-																				 alt="<spring:message code="meal.code.${codeNumber}.description" />"
-																				 title="<spring:message code="meal.code.${codeNumber}.name" />"/>	
-																		</c:when>
-																		<c:otherwise>
+																	<c:if test="${codeNumber==userCodeNumber}">
 																		
-																			<c:set var="findAllergen" value="1"/>
-																		</c:otherwise>
-																	</c:choose>
-																</c:if>
-															</c:forEach>								
-														</c:forEach>
-														
-														<c:if test="${findAllergen == 1}">
+																		<c:choose>
+																			<c:when test="${codeNumber=='12'}">
+																				<img src="<%= renderRequest.getContextPath() %><spring:message code="meal.code.${codeNumber}.img" />"
+																				 	alt="<spring:message code="meal.code.${codeNumber}.description" />"
+																				 	title="<spring:message code="meal.code.${codeNumber}.name" />"/>	
+																			</c:when>
+																			<c:when test="${codeNumber=='15'}">
+																				<img src="<%= renderRequest.getContextPath() %><spring:message code="meal.code.${codeNumber}.img" />"
+																				 	alt="<spring:message code="meal.code.${codeNumber}.description" />"
+																				 	title="<spring:message code="meal.code.${codeNumber}.name" />"/>	
+																			</c:when>
+																			<c:otherwise>
+																			
+																				<c:set var="findAllergen" value="1"/>
+																			</c:otherwise>
+																		</c:choose>
+																	</c:if>
+																</c:forEach>								
+															</c:forEach>
+															
+															<c:if test="${findAllergen == 1}">
+																<a href="${viewDish}">
+																<img src="/esup-dining/images/danger.png" width="16px" height="16px"
+																 	alt="<spring:message code="meal.danger.name" />"
+																 	title="<spring:message code="meal.danger.description" />"/>	
+																</a>
+															</c:if>
+														</c:if>
+													</th>
+													<th style="background-color: transparent;">
+														<li>
+	
+															<c:if test="${not empty dish.code or not empty dish.ingredients or not empty dish.nutritionitems}">
 															<a href="${viewDish}">
-															<img src="/esup-dining/images/danger.png" width="16px" height="16px"
-																 alt="<spring:message code="meal.danger.name" />"
-																 title="<spring:message code="meal.danger.description" />"/>	
+															</c:if>
+															${dish.name}
+															<c:if test="${not empty dish.code or not empty dish.ingredients or not empty dish.nutritionitems}">
 															</a>
-														</c:if>
-													</c:if>
-												</th>
-												<th style="background-color: transparent;">
-													<li>
-
-														<c:if test="${not empty dish.code or not empty dish.ingredients or not empty dish.nutritionitems}">
-														<a href="${viewDish}">
-														</c:if>
-														${dish.name}
-														<c:if test="${not empty dish.code or not empty dish.ingredients or not empty dish.nutritionitems}">
-														</a>
-														</c:if>	
-													</li>
-												</th>
-												</tr>
+															</c:if>	
+														</li>
+													</th>
+													</tr>
+												</c:if>
 											</c:forEach>
 										</table>
 
