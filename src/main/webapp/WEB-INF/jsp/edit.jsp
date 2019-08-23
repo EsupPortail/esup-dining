@@ -110,6 +110,12 @@
 
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                 <label style="float: none;">
+
+                    <img src="<%=renderRequest.getContextPath()%><spring:message code="meal.code.${fn:trim(code)}.img" />"
+                         alt="<spring:message code="meal.code.${fn:trim(code)}.description" />"
+                         title="<spring:message code="meal.code.${fn:trim(code)}.name" />"
+                    />
+
                     <spring:message code="meal.code.${fn:trim(code)}.name" />
                     <input type="checkbox" name="code-${code}" id="code-${code}"
                         <c:forEach var="userPrefCode" items="${nutritionPrefs}">
@@ -127,6 +133,7 @@
         <legend>
             <spring:message code="edit.nutritive.preferences"/>
         </legend>
+
         <c:forEach var="code" items="${preferenceCodes}" varStatus="status">
 
             <c:if test="${status.index % 2 == 0}">
@@ -140,6 +147,12 @@
 
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                 <label style="float: none;">
+
+                    <img src="<%=renderRequest.getContextPath()%><spring:message code="meal.code.${fn:trim(code)}.img" />"
+                         alt="<spring:message code="meal.code.${fn:trim(code)}.description" />"
+                         title="<spring:message code="meal.code.${fn:trim(code)}.name" />"
+                    />
+
                     <spring:message code="meal.code.${fn:trim(code)}.name" />
                     <input type="checkbox" name="code-${code}" id="code-${code}"
                         <c:forEach var="userPrefCode" items="${nutritionPrefs}">
