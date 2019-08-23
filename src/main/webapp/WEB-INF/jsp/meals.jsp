@@ -132,7 +132,7 @@
 													<portlet:param name="code" value="${dish.code}"/>
 												</portlet:renderURL>
 												<tr>
-												<th width="75px" style="padding-right:1em; background-color: transparent; text-align:right">
+												<th width="85px" style="padding-right:1em; background-color: transparent; text-align:right">
 													<c:if test="${not empty dish.code}">
 														<c:forEach var="codeNumber" items="${dish.code}">
 															<c:forEach var="userCodeNumber" items="${nutritionPrefs}">
@@ -141,18 +141,14 @@
 																	
 																	<c:choose>
 																		<c:when test="${codeNumber=='12'}">
-																			<a href="${viewDish}">
 																			<img src="<%= renderRequest.getContextPath() %><spring:message code="meal.code.${codeNumber}.img" />"
 																				 alt="<spring:message code="meal.code.${codeNumber}.description" />"
 																				 title="<spring:message code="meal.code.${codeNumber}.name" />"/>	
-																			</a>
 																		</c:when>
 																		<c:when test="${codeNumber=='15'}">
-																			<a href="${viewDish}">
 																			<img src="<%= renderRequest.getContextPath() %><spring:message code="meal.code.${codeNumber}.img" />"
 																				 alt="<spring:message code="meal.code.${codeNumber}.description" />"
 																				 title="<spring:message code="meal.code.${codeNumber}.name" />"/>	
-																			</a>
 																		</c:when>
 																		<c:otherwise>
 																		
@@ -183,33 +179,6 @@
 														</a>
 														</c:if>	
 													</li>
-												</th>
-												<th width="200px" STYLE="padding-left:1em; background-color: transparent;">
-													<c:if test="${not empty dish.code or not empty dish.ingredients or not empty dish.nutritionitems}">
-													<a href="${viewDish}">
-													</c:if>
-													
-													<c:if test="${not empty dish.code or not empty dish.ingredients or not empty dish.nutritionitems}">
-														<c:forEach var="codeNumber" items="${dish.code}">
-														
-															<c:choose>
-																<c:when test="${codeNumber=='12'}">
-																</c:when>
-																<c:when test="${codeNumber=='15'}">
-																</c:when>
-																<c:otherwise>
-																	<img src="<%= renderRequest.getContextPath() %><spring:message code="meal.code.${codeNumber}.img" />"
-																		 alt="<spring:message code="meal.code.${codeNumber}.description" />"
-																		 title="<spring:message code="meal.code.${codeNumber}.name" />"/>	
-																</c:otherwise>
-															</c:choose>
-
-														</c:forEach>
-													</c:if>	
-													
-													<c:if test="${not empty dish.code or not empty dish.ingredients or not empty dish.nutritionitems}">
-													</a>
-													</c:if>		
 												</th>
 												</tr>
 											</c:forEach>
