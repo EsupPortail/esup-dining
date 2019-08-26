@@ -17,7 +17,7 @@
 <%-- Inclusion JS --%>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_MAP_KEY&callback=initMap"></script>
 
 <%-- Portlet container --%>
 <div class="pc sm">
@@ -26,7 +26,6 @@
 <script type="text/javascript">
 
 	(function($){
-
 		var $portletContainers;
 		
 		$(document).ready(function() {
@@ -56,7 +55,6 @@
 				}	
 			});
 		}
-
 	})(jQuery);
 
 </script>
