@@ -39,6 +39,17 @@ The server will be launched and available at `http://localhost:8080/pluto`
 
 ## Deployment and configuration
 
+### System configuration
+
+To use the google maps, you must indicate an API key in `src/main/webapp/WEB-INF/jsp/header.jsp`
+
+```
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_MAP_KEY&callback=initMap"></script>
+```
+
+Replace `GOOGLE_MAP_KEY` by your API key. If you don't have a such key, refer to https://developers.google.com/maps/documentation/javascript/get-api-key
+
+
 ### Deployment
 
 This portlet is made to run in uPortal 4, to do so just run in your portal
@@ -63,9 +74,9 @@ mvn exec:java -Dexec.args="database" -Dexec.args="[arg]"
 
 Each of these arguments refers to a `*.sql` file located in `src/main/resources/database/*.sql`
 
-### Configuration
+### Configuration in your portal
 
-Add you portlet to the dashboard and go in *EDIT mode* , to configure the portlet the user will to have `diningPortletAdmin` role. Default Everyone has this role, you can update this by changing the following lines in `src/main/webapp/WEB-INF/portlet.xml`
+Add your portlet to the dashboard and go in *EDIT mode* , to configure the portlet the user will to have `diningPortletAdmin` role. Default Everyone has this role, you can update this by changing the following lines in `src/main/webapp/WEB-INF/portlet.xml`
 
 ```
 <security-role-ref>
