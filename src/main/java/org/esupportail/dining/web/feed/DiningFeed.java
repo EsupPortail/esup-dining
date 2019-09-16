@@ -63,6 +63,9 @@ public class DiningFeed implements Serializable {
 		this.jsonStringified = new String();
 		this.mapper = new ObjectMapper();
 
+                //JsonParseException: Illegal unquoted character :
+                mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true);
+
 		try {
 			ResultSet results = this.dc.executeQuery("SELECT URLFLUX FROM PATHFLUX WHERE IS_DEFAULT=true");
 			results.next();
